@@ -1,52 +1,171 @@
+/* Estilo base */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  padding: 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
   margin: 0;
+  color: #222;
+  transition: background 0.3s, color 0.3s;
 }
 
 #task-manager {
   background: #fff;
   padding: 20px;
-  margin: auto;
-  width: 80%;
-  max-width: 600px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;   /* margen arriba/abajo 20px y centrado automático */
+  width: 90%;          /* usa 90% del ancho disponible */
+  max-width: 600px;    /* límite en pantallas grandes */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: background 0.3s, color 0.3s;
 }
 
+
+
+/* Formulario */
 #task-form {
+  display: flex;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 #task-input {
+  flex: 1;
   padding: 10px;
-  width: 70%;
-  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.3s;
 }
 
+#task-input:focus {
+  border-color: #888;
+  outline: none;
+}
+
+/* Lista */
 #task-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 #task-list li {
-  background: #eee;
-  padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f1f1;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background 0.3s;
 }
 
-/* Dark theme styles */
+#task-list li:hover {
+  background: #e6e6e6;
+}
+
+.task-text.is-done {
+  text-decoration: line-through;
+  color: #999;
+}
+
+/* Botones */
+button, .task-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 6px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+button:hover, .task-actions button:hover {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+/* Checkbox */
+.task-check {
+  margin-right: 10px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #555;
+}
+
+#filters label {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#counter {
+  font-weight: bold;
+}
+
+/* Tema oscuro */
 body.dark-theme {
-  background-color: #333;
-  color: #fff;
+  background-color: #1e1e1e;
+  color: #f5f5f5;
 }
 
 .dark-theme #task-manager {
-  background: #222;
-  color: #fff;
+  background: #2a2a2a;
+  color: #f5f5f5;
 }
 
 .dark-theme #task-list li {
-  background: #444;
+  background: #333;
+}
+
+.dark-theme #task-list li:hover {
+  background: #3d3d3d;
+}
+
+.dark-theme #task-input {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: #f5f5f5;
+}
+
+.dark-theme #task-input:focus {
+  border-color: #888;
+}
+
+#task-manager h1 {
+  text-align: center;
+}
+
+/* En móviles: contador arriba y filtros abajo */
+@media (max-width: 600px) {
+  .toolbar {
+    flex-direction: column;   /* apila en columna */
+    align-items: flex-start;  /* alinea a la izquierda (o usa center si prefieres) */
+    gap: .5rem;
+  }
+
+  #counter {
+    order: -1;  /* fuerza que el contador quede primero */
+    align-self: center; /* centra el contador */
+  }
+
+  #filters {
+    order: 1;   /* los filtros abajo */
+    align-self: center; /* centra los filtros */
+  }
+}
+
+@media (max-width: 480px) {
+  #task-manager {
+    padding: 15px;
+    width: 95%; /* aún más aire a los lados */
+  }
 }
